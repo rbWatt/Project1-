@@ -1,41 +1,46 @@
-#include<stdio.h>
+#include <stdio.h>
  
 int main()
 {
 	char message[100], ch;
-	int i, key;
-	int program, m;
+	int i=0, key;
+	int operation, cypher;
 	
-	printf("ceaser cypher encryption = 1\n");
-	printf("substitution cypher encryption = 2\n");
-	printf("ceaser cypher decryption = 3\n");
-	printf("substitution cypher decryption = 4\n");
+	printf("cypher list\n");
+	printf("1. ceaser cypher\n");
+	printf("2. substitution cypher \n");
 	
-	printf("choose program: "); 
-	scanf("%d", m);  //to choose which operation to complete
-	 
-	program = m ;
+	printf("choose cypher:");
+	scanf("%d", &cypher);
+
+	if(cypher = 1){
+	    printf("1. encrypt message\n");
+	    printf("2. decrypt message\n");
+	    printf("choose program: "); 
+	    scanf("%d", &operation) ;  
+	    
+	switch (operation){           
 	
-	if ( program = 1){           //ceaser cypher loop
+	case 1 :
 	
 	printf("Enter a message to encrypt: ");
-	scanf("%[^\n]c", message);
+	scanf("%s", message);
+	
+	  while (message[i] != '\0') {
+      if (message[i] >= 'a' && message[i] <= 'z') 
+         message[i] = message[i] - 32;
+      
+      i++;
+	      
+	  }
+      
 	printf("Enter key: ");
 	scanf("%d", &key);
 	
 	for(i = 0; message[i] != '\0'; ++i){
 		ch = message[i];
 		
-		if(ch >= 'a' && ch <= 'z'){
-			ch = ch + key;
-			
-			if(ch > 'z'){
-				ch = ch - 'z' + 'a' - 1;
-			}
-			
-			message[i] = ch;
-		}
-		else if(ch >= 'A' && ch <= 'Z'){
+		if(ch >= 'A' && ch <= 'Z'){
 			ch = ch + key;
 			
 			if(ch > 'Z'){
@@ -46,8 +51,14 @@ int main()
 		}
 	}
 	
-	printf("Encrypted message: %s", message);
-	}
+	printf("Encrypted message: %s\n", message);
+	break ;
 	
-	return 0;
+	case 2:
+	break;
+	    
+	}
+
+	}
+	return 0 ;
 }
