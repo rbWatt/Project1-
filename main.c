@@ -29,62 +29,72 @@ int main ()
       //the coded corresponding characters.
       
       
-      printf ("Enter a message to encrypt: ");
-      scanf ("%[^\n]s", message);
-      while (message[i] != '\0')                      //This while loop depends on the definition that it has to operate with a character as it will terminate with the null which is a 0 or 'nothing value'.
-      {
-        //this minor operation converts 
-        //lower case to upper case.
-        if (message[i] >= 'a' && message[i] <= 'z')   //This 'if'loop statement corresponds to any lower case value within the ASCII table.
-        message[i] = message[i] - 32;                 //Because the corresponding capital letters are 32 values lower than lower case letter'c maths is used on the ASCII values.
-        i++;                                          //this is used to repeat loop until every lower case character is changed to upper case.
-      }
-      printf ("Enter key: ");
-      scanf ("%d", &key);
-      for (i = 0; message[i] != '\0'; ++i)            //In this for loop i is re initialised so every character in the string can be included in null occurse (when no more characters occur).
-      {
-        if (message[i] >= 'A' && message[i] <= 'Z')   //The if loop activates only when the values in the ASCII table between and including A and Z occur.
-        {
-          message[i] = message[i] + key;              //This maths adds the constant key to each character in order to give the coded character.
-          
-          //minor function allows complete rotation 
-          //around the ends of the alphabet.
-          if (message[i] > 'Z')
-          {
-            message[i] = message[i] - 'Z' + 'A' - 1;
-          }
-        }
-      }
-      printf ("Encrypted message: %s\n", message);
+     printf("Enter a message to encrypt: ");
+	scanf(" %[^\n]s", message);
+	printf("Enter key: ");
+	scanf("%d", &key);
+	
+	for(i = 0; message[i] != '\0'; ++i){
+		
+		if(message[i] >= 'a' && message[i] <= 'z'){
+			message[i] = message[i] + key - 32;
+			
+			if(message[i] > 'Z'){
+				message[i] = message[i] - 'Z' + 'A' - 1;
+			}
+			
+			
+		}
+		else if(message[i] >= 'A' && message[i] <= 'Z'){
+			message[i] = message[i] + key;
+			
+			if(message[i] > 'Z'){
+				message[i] = message[i] - 'Z' + 'A' - 1;
+			}
+			
+		
+		}
+	}
+	
+	printf("Encrypted message: %s", message);
+	
   }
 
       else
       {
-      printf ("Enter a message to decrypt: ");
-      scanf ("%s", message);
-      while (message[i] != '\0')
-      {
-        if (message[i] >= 'a' && message[i] <= 'z')
-        message[i] = message[i] - 32;
-        i++;
-      }
-      printf ("Enter key: ");
-      scanf ("%d", &key);
-      for (i = 0; message[i] != '\0'; ++i)
-      {
-        if (message[i] >= 'A' && message[i] <= 'Z')
-        {
-          message[i] = message[i] - key;
-          if (message[i] < 'A')
-          {
-            message[i] = message[i] + 'Z' - 'A' + 1;
-          }
-        }
-        printf ("Decrypted message: %s\n", message);
+      printf("Enter a message to decrypt: ");
+	scanf(" %[^\n]s",message);
+	printf("Enter key: ");
+	scanf("%d", &key);
+	
+	for(i = 0; message[i] != '\0'; ++i){
+		
+		if(message[i] >= 'a' && message[i] <= 'z'){
+			message[i] = message[i] - key-32;
+			
+			if(message[i] < 'A'){
+				message[i] = message[i] + 'Z' - 'A' + 1;
+			}
+			
+		}
+		else if(message[i] >= 'A' && message[i] <= 'Z'){
+			message[i] = message[i] - key;
+			
+			if(message[i] < 'A'){
+				message[i] = message[i] + 'Z' - 'A' + 1;
+			}
+			
+
+		}
+	}
+	
+	printf("Decrypted message: %s", message);
         
       }
     }
-  }
+  
+  
+  
   else
   {
     printf ("enter key: ");
@@ -97,7 +107,7 @@ int main ()
     {
       case 1:
       printf ("input what you want encrypted: ");
-      scanf ("%s", message);
+      scanf (" %[^\n]", message);
       while (message[i] != '\0')
       {
         if (message[i] >= 'a' && message[i] <= 'z')
