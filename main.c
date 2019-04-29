@@ -95,6 +95,12 @@ int main ()
     scanf ("%d", &operation);                          //similar to line 23
     if(operation==1)
     {
+      //this encrypts the message in the substitution cypher
+      //by using the input string and connecting them
+      //to ASCII values then returning them to 
+      //local character array to be outputted 
+      //this can read whitespaces as input 
+      //but cannot produce them as output
       printf ("Enter message to encrypted: ");
       scanf (" %[^\n]s", message);                     //similar to line 31 
       for(i=0;message[i] != '\0';++i)
