@@ -1,4 +1,4 @@
-#include <stdio.h>
+# include <stdio.h>
 
 //there are four operation that are within this program, they are in pairs ceaser cypher and the substitution cypher.
 //While they go deeper into two operations the decryption and encryption.
@@ -6,10 +6,11 @@
 
 int main () 
 {
+  char d;                                            //this is the character variable used for decryption by substitution
   char message[27];                                  //This is the string that is initialised through ASCII
   char string[27];                                   //This is the string that is initialised locally, is the key for substitution cypher.
   int operation, cypher;                              //These are integers used access the four operations.
-  int i , key, n;                                     //these are variables used in the operation and cypher.
+  int i , key, n ;                                     //these are variables used in the operation and cypher.
   printf ("cypher list\n");
   printf ("1. ceaser cypher\n");
   printf ("2. substitution cypher \n");
@@ -19,7 +20,7 @@ int main ()
   {
     printf ("1. encrypt message\n");
     printf ("2. decrypt message\n");
-    printf ("choose program: ");
+    printf ("choose operation: ");
     scanf ("%d", &operation);                         //This determines the operation of the cypher either encrypt or decrypt using a if statement.
     if (operation==1)
     {
@@ -90,11 +91,11 @@ int main ()
     scanf ("%s", string);                              // this is used to initialise the key(the substituted values) which is a string of the alphabet
     printf ("1. encrypt message\n");
     printf ("2. decrypt message\n");
-    printf ("choose program: ");
+    printf ("choose operation: ");
     scanf ("%d", &operation);                          //similar to line 23
     if(operation==1)
     {
-      printf ("input what you want encrypted: ");
+      printf ("Enter message to encrypted: ");
       scanf (" %[^\n]s", message);                     //similar to line 31 
       for(i=0;message[i] != '\0';++i)
       {
@@ -112,11 +113,31 @@ int main ()
       }
     }  
 
-    else
+    else 
     {
-        
+      // this is the substitution decryption,
+      // it takes the input for the local string.
+      // while returning the real characters using the ASCII table.
+      // disadvantage the output occurs in singular character 
+      // not producing a solid string, there not accessing spaces
+      //The input can only be upper case.
+      //
+      for(i=0; string[i]!='\0';i++)                     
+      {
+        printf("type in single character(must be upper case): ");
+        scanf("%s", &d);                                //this takes the character input and stores it in a character variable.
+        for (i=0;string[i]!='\0';i++)
+        {
+          if(string[i]==d)                              //this breaks upon the condition if the local array (key) is similar to the input value. 
+          break;
+        }
+        if (d>='A' && d<='Z')                           //the if statement occurs for all the character input within A and Z.
+        {
+          d = i + 65;                                   //this takes the integer elements of the local array and returns it the the character valiable
+          printf("character = %c\n ", d);         //this prints out the character variable ASCII value and its corresponding entered position in input
+        }
+      }
     }
-
   }
   return 0;
 }
