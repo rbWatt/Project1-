@@ -6,8 +6,8 @@
 
 int main () 
 {
-  char message[100];                                  //This is the string that is initialised through ASCII
-  char string[100];                                   //This is the string that is initialised locally, is the key for substitution cypher.
+  char message[27];                                  //This is the string that is initialised through ASCII
+  char string[27];                                   //This is the string that is initialised locally, is the key for substitution cypher.
   int operation, cypher;                              //These are integers used access the four operations.
   int i , key, n;                                     //these are variables used in the operation and cypher.
   printf ("cypher list\n");
@@ -27,102 +27,96 @@ int main ()
       //not coded the character then evenly rotate by 
       //a certain amount described by the key then outputs
       //the coded corresponding characters.
-      
-      
-     printf("Enter a message to encrypt: ");
-	scanf(" %[^\n]s", message);
-	printf("Enter key: ");
-	scanf("%d", &key);
-	
-	for(i = 0; message[i] != '\0'; ++i){
-		
-		if(message[i] >= 'a' && message[i] <= 'z'){
-			message[i] = message[i] + key - 32;
-			
-			if(message[i] > 'Z'){
-				message[i] = message[i] - 'Z' + 'A' - 1;
-			}
-			
-			
-		}
-		else if(message[i] >= 'A' && message[i] <= 'Z'){
-			message[i] = message[i] + key;
-			
-			if(message[i] > 'Z'){
-				message[i] = message[i] - 'Z' + 'A' - 1;
-			}
-			
-		
-		}
-	}
-	
-	printf("Encrypted message: %s", message);
-	
-  }
-
-      else
-      {
-      printf("Enter a message to decrypt: ");
-	scanf(" %[^\n]s",message);
-	printf("Enter key: ");
-	scanf("%d", &key);
-	
-	for(i = 0; message[i] != '\0'; ++i){
-		
-		if(message[i] >= 'a' && message[i] <= 'z'){
-			message[i] = message[i] - key-32;
-			
-			if(message[i] < 'A'){
-				message[i] = message[i] + 'Z' - 'A' + 1;
-			}
-			
-		}
-		else if(message[i] >= 'A' && message[i] <= 'Z'){
-			message[i] = message[i] - key;
-			
-			if(message[i] < 'A'){
-				message[i] = message[i] + 'Z' - 'A' + 1;
-			}
-			
-
-		}
-	}
-	
-	printf("Decrypted message: %s", message);
-        
-      }
+      printf("Enter a message to encrypt: ");
+	  scanf(" %[^\n]s", message);                     //takes input including whitespaces for operation
+	  printf("Enter key: ");                          
+	  scanf("%d", &key);                             
+	  for(i = 0; message[i] != '\0'; ++i)             //the condition for the 'for' loop is that i works only when there is an input shown by message[i] != '\0'.
+	  {
+	   	if(message[i] >= 'a' && message[i] <= 'z')    //this if statements works with all the input values on the ASCII table between 'a' and 'z'.
+	  	{
+	  	  message[i] = message[i] + key - 32;         //this mathematic operation takes the lower case input makes it into upper case and rotates the characters around the alphabet.
+	   	  if(message[i] > 'Z')                        //this if statements allows the characters roatate from the ends of the alphabet string e.g. for A -> Z
+	   	  {
+	  	    message[i] = message[i] - 'Z' + 'A' - 1;  //this is the maths when a letter is rotate around beyond Z making it comeback to A
+	  	  }	
+	  	}
+	  	else if(message[i] >= 'A' && message[i] <= 'Z') //this if statements works with all the input values on the ASCII table between 'A' and 'Z'.
+  	  	{
+          message[i] = message[i] + key;                //this mathematic operation rotates each letter character around the alphabet string. 
+          if(message[i] > 'Z')                          //when the character rotates beyond the end of the alphabet string (beyond 'Z')it is returned to 'A'.       
+       	  {
+	   	    message[i] = message[i] - 'Z' + 'A' - 1;   // similar to before.
+          }
+	  	}
+	  }
+      printf("Encrypted message: %s", message);        // this prints out the characters that have been mathematically manipulated through the for statement
     }
-  
-  
-  
+     //The following operation takes input thats 
+     //coded the character then evenly rotate by 
+     //a certain amount described by the negative key then outputs
+     //the not coded corresponding characters.
+    else
+    {
+    printf("Enter a message to decrypt: ");
+	scanf(" %[^\n]s",message);                         //similar to line 31
+	printf("Enter key: ");
+	scanf("%d", &key);
+	for(i = 0; message[i] != '\0'; ++i)                // similar to line 34
+	{		
+	  if(message[i] >= 'a' && message[i] <= 'z')       // similar to line 36
+	  {
+	    message[i] = message[i] - key-32;              // note the only difference between this maths operation to last one is the key is treated as negative.
+		if(message[i] < 'A')
+		{
+		  message[i] = message[i] + 'Z' - 'A' + 1;     // similar to line 41
+	    }	
+      }  
+	  else if(message[i] >= 'A' && message[i] <= 'Z')  //similar to before 44
+	  {
+	    message[i] = message[i] - key;			       // again the key value is treated negatively so it does opposite operate to encrypt 'decrypt'
+		if(message[i] < 'A')
+		{
+		  message[i] = message[i] + 'Z' - 'A' + 1;     //similar to before 49
+		}
+	  } 
+	}
+    printf("Decrypted message: %s", message);          //similar to before 53
+    }
+  }
   else
   {
-    printf ("enter key: ");
-    scanf ("%s", string);
+    printf ("enter key: ");                              
+    scanf ("%s", string);                              // this is used to initialise the key(the substituted values) which is a string of the alphabet
     printf ("1. encrypt message\n");
     printf ("2. decrypt message\n");
     printf ("choose program: ");
-    scanf ("%d", &operation);
-    switch (operation)
+    scanf ("%d", &operation);                          //similar to line 23
+    if(operation==1)
     {
-      case 1:
       printf ("input what you want encrypted: ");
-      scanf (" %[^\n]", message);
-      while (message[i] != '\0')
+      scanf (" %[^\n]s", message);                     //similar to line 31 
+      for(i=0;message[i] != '\0';++i)
       {
-        if (message[i] >= 'a' && message[i] <= 'z')
-        message[i] = message[i] - 32;
-        i++;
+        if (message[i] >= 'a' && message[i] <= 'z')    //similar to line 36
+        {
+          message[i] = message[i] - 32;                //this operation uses the ASCII values to return lower case input as upper case.
+          n = message[i] - 65;                         //this mathematical operation returns the ascii value alphabet to integer value beginning from 0 (within the integer variable 'n'). 
+          printf("%c", string[n]);                     //using the integers variable the key (string[27])is accessed, and outputs the substituted characters.
+        }
+        else if(message[i] >= 'A' && message[i] <= 'Z') //similar to line 44
+        {
+          n = message[i] - 65;                         //similar to line 104
+          printf("%c", string[n]);                     //similar to line 105
+        }
       }
-      for (i = 0; message[i] != '\0'; ++i)
-      {
-        n = message[i] - 65;
-      }
-      printf ("encrypted message: %s\n", string);
-      break;
-      case 2:
-      break;
+    }  
+
+    else
+    {
+        
     }
+
   }
   return 0;
 }
